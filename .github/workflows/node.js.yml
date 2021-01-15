@@ -18,10 +18,19 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
+     - run: |
+        git config --global user.name kenzouno1
+        git config --global user.email kenzouno1@gmail.com
+        
+     - name: Checkout
+       uses: actions/checkout@v2
+      
+     - name: Use Node.js ${{ matrix.node-version }}
+       uses: actions/setup-node@v1
+       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run index
+     - run: npm ci
+     - run: npm run index
+     - run: git add .
+     - run: git commit -m "Update Data"
+     - run: git push origin master
